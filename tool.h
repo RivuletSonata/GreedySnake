@@ -13,6 +13,8 @@ class Point{
         void PrintDot();
         void ChangePoint(const int x,const int y);
         void ClearPoint();
+        int getx(){return this->x ;}
+        int gety(){return this->y ;}
     private:
         int x;
         int y;

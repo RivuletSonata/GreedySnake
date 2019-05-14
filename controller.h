@@ -9,13 +9,14 @@ class Controller{
         void Welcome();
         void Select ();
         void InitMap();
-        void RunningGame();
+        int RunningGame();
         void Game();
         void Menu();
         void GameOver();
         void DrawScore();
     private:
         int score;
+        int speed;
         int mode;
 };
 #endif

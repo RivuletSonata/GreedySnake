@@ -133,10 +133,51 @@ void Controller::Select(){
 }
 
 void Controller::InitMap(){
+    system("cls");
+    
+    Map *newmap= new Map();
+    newmap->DrawMap();
+    delete newmap;
 
+    setTextColor(3);
+    setCursorLocation(33,1);
+    std::cout<<"Greedy Snake";
+    setCursorLocation(32,3);
+    std::cout<<"Difficulty:";
+    setCursorLocation(33,5);
+    switch(mode){
+        case 1:
+            std::cout<<"简单模式";
+            break;
+        case 2:
+            std::cout<<"普通模式";
+            break;
+        case 3:
+            std::cout<<"困难模式";
+            break;
+        case 4:
+            std::cout<<"噩梦模式";
+            break;
+        default:
+            break;
+    }
+    setCursorLocation(31, 7);
+    std::cout << "得分：" ;
+    setCursorLocation(37, 8);
+    std::cout << "     0" ;
+    setCursorLocation(33, 13);
+    std::cout << " 方向键移动" ;
+    setCursorLocation(33, 15);
+    std::cout << " ESC键暂停" ;
 }
 
-void RunningGame(){
+int RunningGame(){
+    Snake *newsnake=new Snake();
+    //Food *;
+    setTextColor(6);
+    newsnake->PrintSnake();
+
+    //newfood->PrintFood();
 
 }
 
@@ -146,5 +187,18 @@ void Controller::Menu(){
 
 void Controller::Game(){
     Welcome();
+    while(true){
+        Select();
+        InitMap();
+        int temp=RunningGame();
+        if(temp==1){
+            system("cls");
+            continue;
+        }
+        if(temp==2){
+            break;
+        }
+        else break;
+    }
 
 }
