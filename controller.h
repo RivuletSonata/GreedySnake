@@ -10,6 +10,7 @@ class Controller{
         void Select ();
         void InitMap();
         int RunningGame();
+        void SetSpeed();
         void Game();
         void Menu();
         void GameOver();

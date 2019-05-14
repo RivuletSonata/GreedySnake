@@ -171,18 +171,55 @@ void Controller::InitMap(){
     std::cout << " ESC键暂停" ;
 }
 
-int RunningGame(){
+int Controller::RunningGame(){
     Snake *newsnake=new Snake();
     //Food *;
     setTextColor(6);
     newsnake->PrintSnake();
 
     //newfood->PrintFood();
+    while(!newsnake->HitWall()&&!newsnake->BiteSelf()){
+        if(!newsnake->ChangeDirection()){
 
+        }
+        if(false){
+
+        }
+        else    newsnake->Move();
+
+
+        Sleep(speed);
+    }
+    delete newsnake;
+    int k;
+    std::cout<<"Game Over. 1: restart; 2:Leave.";
+    std::cin>>k;
+    return k;
 }
 
 void Controller::Menu(){
 
+}
+
+void Controller::SetSpeed(){
+    switch (mode)
+    {
+    case 1:
+        speed=130;
+        break;
+    case 2:
+        speed=95;
+        break;
+
+    case 3:
+        speed=60;
+        break;
+    case 4:
+        speed=35;
+        break;
+    default:
+        break;
+    }
 }
 
 void Controller::Game(){
@@ -190,6 +227,7 @@ void Controller::Game(){
     while(true){
         Select();
         InitMap();
+
         int temp=RunningGame();
         if(temp==1){
             system("cls");

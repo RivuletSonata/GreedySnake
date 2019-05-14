@@ -3,13 +3,12 @@
 #include <bits/stdc++.h>
 #include <cstdio>
 #include <conio.h>
-using namespace std;
 
 Snake::Snake(){
     snake.emplace_back(14,8);
     snake.emplace_back(15,8);
     snake.emplace_back(16,8);
-    direction = Direction::DOWN;
+    direction = Direction::UP;
 }
 
 void Snake::PrintSnake(){
@@ -43,6 +42,7 @@ bool Snake::ChangeDirection(){
                         if(direction!=LEFT)
                             direction=RIGHT;
                         break;
+                        
                     default:
                         break;
                 }
@@ -59,9 +59,51 @@ bool Snake::ChangeDirection(){
 }
 
 void Snake::AddLengthMove(){
+    switch(direction){
+        case Direction::UP:
+            snake.emplace_front(Point(snake.front().getx(),snake.front().gety()-1));
+            break;
+        case Direction::DOWN:
+            snake.emplace_front(Point(snake.front().getx(),snake.front().gety()+1));
+            break;
+        case Direction::LEFT:
+            snake.emplace_front(Point(snake.front().getx()-1,snake.front().gety()));
+            break;
+        case Direction::RIGHT:
+            snake.emplace_front(Point(snake.front().getx()+1,snake.front().gety()));
+            break;
+        default:
+            break;
+    }
+    setTextColor(14);
+    snake.front().PrintDot();
 
 }
 
 void Snake::Move(){
+    AddLengthMove();
+    snake.back().ClearPoint();
+    snake.pop_back();
+}
 
+bool Snake::BiteSelf(){
+    int cnt=0;
+    for(auto& point :snake){
+        if(point.getx()==snake.front().getx()&&point.gety()==snake.front().gety()){
+            ++cnt;
+        }
+    }
+    if(cnt>=2)  return true; //ture ->has bit self
+    else return false; 
+}
+
+bool Snake::GetFood(){
+
+}
+
+bool Snake::HitWall(){
+    return snake.front().getx()>=30||
+            snake.front().getx()<=1||
+            snake.front().gety()>=30||
+            snake.front().gety()<=1;//true->has hit wall
 }
