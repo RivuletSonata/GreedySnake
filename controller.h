@@ -5,14 +5,14 @@
 
 class Controller{
 	public:
-        Controller();
+        Controller():speed(140),mode(1),score(0){};
         void Welcome();
         void Select ();
         void InitMap();
         int RunningGame();
         void SetSpeed();
         void Game();
-        void Menu();
+        int Menu();
         void GameOver();
         void DrawScore();
     private:

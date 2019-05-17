@@ -33,12 +33,12 @@ void setCursorLocation(int x,int y){
 
 void Point::Print(){
     setCursorLocation(x,y);
-    cout<<"■";
+    cout<<"#";
 }
 
 void Point::PrintDot(){
     setCursorLocation(x,y);
-    cout<<"●";
+    cout<<"o";
 }
 void Point::ChangePoint(const int x,const int y){
     this->x=x;

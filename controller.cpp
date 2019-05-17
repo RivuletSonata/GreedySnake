@@ -22,19 +22,19 @@ void Controller::Welcome(){
 void Controller::Select(){
     setTextColor(3);
     setCursorLocation(13,10);
-    std::cout << "请使用上下按键选择模式，并用回车确认:";
+    std::cout << "Use Direction Key to choose mode and tap enter to confirm:";
 
     setCursorLocation(13,13);
     setBackgroundColor();
     
-	std::cout << "1.简单模式" ;
-    //setTextColor(3);
+	std::cout << "1.Easy Mode" ;
+    setTextColor(3);
     setCursorLocation(13,14);
-	std::cout << "2.正常模式" ;
+	std::cout << "2.Ordinary Mode" ;
     setCursorLocation(13,15);
-	std::cout << "3.困难模式" ;
+	std::cout << "3.Hard Mode" ;
     setCursorLocation(13,16);
-	std::cout << "4.噩梦模式" ;
+	std::cout << "4.Nightmare Mode" ;
 
     bool isenter=false;
     mode=1;
@@ -48,33 +48,33 @@ void Controller::Select(){
                     case 2:
                         setCursorLocation(13,13);
                         setBackgroundColor();
-                        std::cout << "1.简单模式" ;
+                        std::cout << "1.Easy Mode" ;
 
                         setCursorLocation(13,14);
                         setTextColor(3);
-                        std::cout<<"2.正常模式";
+                        std::cout<<"2.Ordinary Mode";
                         --mode;
                         break;
                     
                     case 3:
                         setCursorLocation(13,14);
                         setBackgroundColor();
-                        std::cout<<"2.正常模式";
+                        std::cout<<"2.Ordinary Mode";
 
                         setCursorLocation(13,15);
                         setTextColor(3);
-                        std::cout << "3.困难模式" ;
+                        std::cout << "3.Hard Mode" ;
                         --mode;
                         break;
                     
                     case 4:
                         setCursorLocation(13,15);
                         setBackgroundColor();
-                        std::cout<<"3.困难模式";
+                        std::cout<<"3.Hard Mode";
 
                         setCursorLocation(13,16);
-                        setBackgroundColor();
-                        std::cout<<"4.噩梦模式";
+                        setTextColor(3);
+                        std::cout<<"4.Nightmare Mode";
                         --mode;
                         break;
                     }
@@ -88,42 +88,43 @@ void Controller::Select(){
                     case 1:
                         setCursorLocation(13,14);//uplight
                         setBackgroundColor();
-                        std::cout << "2.正常模式" ;
+                        std::cout << "2.Ordinary Mode" ;
 
                         setCursorLocation(13,13);//cancel background color
                         setTextColor(3);
-                        std::cout<<"1.简单模式";
+                        std::cout<<"1.Easy Mode";
                         ++mode;
                         break;
                     
                     case 2:
                         setCursorLocation(13,15);
                         setBackgroundColor();
-                        std::cout<<"3.困难模式";
+                        std::cout<<"3.Hard Mode";
 
                         setCursorLocation(13,14);
                         setTextColor(3);
-                        std::cout<<"2.正常模式";
+                        std::cout<<"2.Ordinary Mode";
                         ++mode;
                         break;
                     
                     case 3:
                         setCursorLocation(13,16);
                         setBackgroundColor();
-                        std::cout<<"4.噩梦模式";
+                        std::cout<<"4.Nightmare Mode";
 
                         setCursorLocation(13,15);
-                        setBackgroundColor();
-                        std::cout<<"3.困难模式";
+                        setTextColor(3);
+                                 
+                        std::cout<<"3.Hard Mode";
                         ++mode;
                         break;
                     }
                 }
                break;
-            case 13://Enter回车键
+            case 13://Enter
                 isenter = true;
                 break;
-            default://无效按键
+            default://inavailable
                 break;  
         }
         if (isenter) break;
@@ -140,38 +141,42 @@ void Controller::InitMap(){
     delete newmap;
 
     setTextColor(3);
-    setCursorLocation(33,1);
+    setCursorLocation(34,1);
     std::cout<<"Greedy Snake";
-    setCursorLocation(32,3);
+    setCursorLocation(34,3);
     std::cout<<"Difficulty:";
-    setCursorLocation(33,5);
+    setCursorLocation(34,5);
     switch(mode){
         case 1:
-            std::cout<<"简单模式";
+            std::cout<<"Easy Mode";
             break;
         case 2:
-            std::cout<<"普通模式";
+            std::cout<<"Ordinary Mode";
             break;
         case 3:
-            std::cout<<"困难模式";
+            std::cout<<"Hard Mode";
             break;
         case 4:
-            std::cout<<"噩梦模式";
+            std::cout<<"Nightmare Mode";
             break;
         default:
             break;
     }
-    setCursorLocation(31, 7);
-    std::cout << "得分：" ;
-    setCursorLocation(37, 8);
+    setCursorLocation(34, 7);
+    std::cout << "Score:" ;
+    setCursorLocation(34, 8);
     std::cout << "     0" ;
-    setCursorLocation(33, 13);
-    std::cout << " 方向键移动" ;
-    setCursorLocation(33, 15);
-    std::cout << " ESC键暂停" ;
+    setCursorLocation(34, 10);
+    std::cout << " Move by Direction Key" ;
+    setCursorLocation(33, 11);
+    std::cout << " ESC to Pause" ;
 }
 
 int Controller::RunningGame(){
+    
+    CONSOLE_CURSOR_INFO CursorInfo;
+    CursorInfo.bVisible = false;
+
     Snake *newsnake=new Snake();
     //Food *;
     setTextColor(6);
@@ -180,10 +185,8 @@ int Controller::RunningGame(){
     //newfood->PrintFood();
     while(!newsnake->HitWall()&&!newsnake->BiteSelf()){
         if(!newsnake->ChangeDirection()){
-
         }
         if(false){
-
         }
         else    newsnake->Move();
 
@@ -192,14 +195,16 @@ int Controller::RunningGame(){
     }
     delete newsnake;
     int k;
+    setCursorLocation(13,13);
+    setTextColor(3);
     std::cout<<"Game Over. 1: restart; 2:Leave.";
     std::cin>>k;
     return k;
 }
 
-void Controller::Menu(){
+//void Controller::Menu(){
 
-}
+//}
 
 void Controller::SetSpeed(){
     switch (mode)
@@ -226,6 +231,7 @@ void Controller::Game(){
     Welcome();
     while(true){
         Select();
+        SetSpeed();
         InitMap();
 
         int temp=RunningGame();
