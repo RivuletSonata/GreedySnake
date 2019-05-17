@@ -1,5 +1,7 @@
 #include "snake.h"
+#include "food.h" 
 #include "tool.h"
+#include "controller.h"
 #include <bits/stdc++.h>
 #include <cstdio>
 #include <conio.h>
@@ -97,8 +99,8 @@ bool Snake::BiteSelf(){
     else return false; 
 }
 
-bool Snake::GetFood(){
-
+bool Snake::GetFood(const Food& newfood){
+    return snake.front().getx()==newfood.lx && snake.front().gety()==newfood.ly;
 }
 
 bool Snake::HitWall(){

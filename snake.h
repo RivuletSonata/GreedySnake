@@ -2,8 +2,12 @@
 #define SNAKE_H
 
 #include"tool.h"
+#include"food.h"
 #include<bits/stdc++.h>
+
+class Food;
 class Snake{
+	friend class Food;
     public:
         Snake();
         enum Direction{UP ,DOWN, RIGHT, LEFT};
@@ -13,7 +17,7 @@ class Snake{
         void Move();
         bool BiteSelf();
         bool HitWall();
-        bool GetFood();
+        bool GetFood(const Food& );
         bool ChangeDirection();
     private:
         int speed;

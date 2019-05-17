@@ -174,28 +174,34 @@ void Controller::InitMap(){
 
 int Controller::RunningGame(){
     
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO CursorInfo;
+    GetConsoleCursorInfo(hOut,&CursorInfo);
     CursorInfo.bVisible = false;
-
+ 	SetConsoleCursorInfo(hOut,&CursorInfo);
+ 	
     Snake *newsnake=new Snake();
-    //Food *;
+    Food  *newfood =new Food();
     setTextColor(6);
     newsnake->PrintSnake();
-
-    //newfood->PrintFood();
+    newfood->GenerateFood(*newsnake);
+    newfood->PrintFood();
     while(!newsnake->HitWall()&&!newsnake->BiteSelf()){
         if(!newsnake->ChangeDirection()){//Input ESC
-            Menu();
+            //Menu();
         }
-        if(false){//Eat Food
+        if(newsnake->GetFood(*newfood)){//Eat Food
             newsnake->AddLengthMove();
             score++;
             DrawScore();
+            newfood->GenerateFood(*newsnake);
+            newfood->PrintFood();
         }
         else    newsnake->Move();
         Sleep(speed);
     }
     delete newsnake;
+    delete newfood;
     int k;
     setCursorLocation(13,13);
     setTextColor(3);
@@ -209,26 +215,26 @@ int Controller::RunningGame(){
 //}
 
 void Controller::DrawScore(){
-    setCursorLocation(33,19);
+    setCursorLocation(34,8);
     setTextColor(6);
-    std::cout<<"Score:"<<score;
+    std::cout<<"     "<<score;
 }
 
 void Controller::SetSpeed(){
     switch (mode)
     {
     case 1:
-        speed=260;
+        speed=220;
         break;
     case 2:
-        speed=200;
+        speed=170;
         break;
 
     case 3:
-        speed=170;
+        speed=135;
         break;
     case 4:
-        speed=140;
+        speed=80;
         break;
     default:
         break;

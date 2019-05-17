@@ -1,4 +1,5 @@
 #include "tool.h"
+#include"snake.h" 
 #include <windows.h>
 #include <bits/stdc++.h>
 #include <string>
