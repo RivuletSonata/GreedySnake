@@ -184,13 +184,15 @@ int Controller::RunningGame(){
 
     //newfood->PrintFood();
     while(!newsnake->HitWall()&&!newsnake->BiteSelf()){
-        if(!newsnake->ChangeDirection()){
+        if(!newsnake->ChangeDirection()){//Input ESC
+            Menu();
         }
-        if(false){
+        if(false){//Eat Food
+            newsnake->AddLengthMove();
+            score++;
+            DrawScore();
         }
         else    newsnake->Move();
-
-
         Sleep(speed);
     }
     delete newsnake;
@@ -206,21 +208,27 @@ int Controller::RunningGame(){
 
 //}
 
+void Controller::DrawScore(){
+    setCursorLocation(33,19);
+    setTextColor(6);
+    std::cout<<"Score:"<<score;
+}
+
 void Controller::SetSpeed(){
     switch (mode)
     {
     case 1:
-        speed=130;
+        speed=260;
         break;
     case 2:
-        speed=95;
+        speed=200;
         break;
 
     case 3:
-        speed=60;
+        speed=170;
         break;
     case 4:
-        speed=35;
+        speed=140;
         break;
     default:
         break;
@@ -233,7 +241,7 @@ void Controller::Game(){
         Select();
         SetSpeed();
         InitMap();
-
+        SetSpeed();
         int temp=RunningGame();
         if(temp==1){
             system("cls");
