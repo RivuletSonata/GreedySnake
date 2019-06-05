@@ -14,6 +14,7 @@ class Controller{
         void Game();
         int Menu();
         void GameOver();
+        int GoSelect();
         void DrawScore();
     private:
         int score;

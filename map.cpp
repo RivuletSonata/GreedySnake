@@ -11,6 +11,7 @@ Map::Map(){
     } 
     for(int i=2;i<=29;++i)  initmap.emplace_back(Point(i,30));
 }
+
 void Map::DrawMap(){
     for (auto& Point : initmap){
         Point.Print();
