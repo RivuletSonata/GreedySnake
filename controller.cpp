@@ -205,14 +205,73 @@ int Controller::RunningGame(){
     int k;
     setCursorLocation(13,13);
     setTextColor(3);
-    std::cout<<"Game Over. 1: restart; 2:Leave.";
-    std::cin>>k;
+    system("cls");
+    k=GameoverSelect();
+
     return k;
 }
 
 //void Controller::Menu(){
 
 //}
+
+int Controller::GameoverSelect(){
+    //system("cls");
+    setCursorLocation(13,10);
+    std::cout<<"Game Over";
+    setCursorLocation(13,12);
+    std::cout<<"Your score:		"<<score;
+    setCursorLocation(13,14);
+    setBackgroundColor();
+    std::cout<<"1.Restart";
+    setCursorLocation(13,15);
+    setTextColor(3);
+    std::cout<<"2.Leave";
+    
+    bool isenter=false;
+    int mode=1;
+    int ch=1;
+    while(ch=getch()){
+        switch (ch){
+            case 72://upmode
+                if(mode==2){
+                
+                        setCursorLocation(13,14);
+                        setBackgroundColor();
+                        std::cout << "1.Restart" ;
+
+                        setCursorLocation(13,15);
+                        setTextColor(3);
+                        std::cout<<"2.Leave";
+                        --mode;
+                    
+                }
+                break;
+        
+            case 80://down mode
+                if(mode==1){
+                    
+                        setCursorLocation(13,15);//uplight
+                        setBackgroundColor();
+                        std::cout << "2.Leave" ;
+
+                        setCursorLocation(13,14);//cancel background color
+                        setTextColor(3);
+                        std::cout<<"1.Restart";
+                        ++mode;
+                }
+               break;
+            case 13://Enter
+                isenter = true;
+                break;
+            default://inavailable
+                break;  
+        }
+        if (isenter) break;
+    }
+    return mode;
+
+}
 
 void Controller::DrawScore(){
     setCursorLocation(34,8);
@@ -247,7 +306,6 @@ void Controller::Game(){
         Select();
         SetSpeed();
         InitMap();
-        SetSpeed();
         int temp=RunningGame();
         if(temp==1){
             system("cls");

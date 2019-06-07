@@ -17,3 +17,4 @@ void Map::DrawMap(){
         Sleep(10);//调用Sleep函数可营造动画效果
     }
 }
+

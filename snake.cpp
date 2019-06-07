@@ -49,8 +49,6 @@ bool Snake::ChangeDirection(){
                         break;
                 }
                 return true;
-            
-
             case 27:
                 return false;
             default:
